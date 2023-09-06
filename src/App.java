@@ -1,35 +1,34 @@
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.ImageIcon;
+
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class App extends JFrame {
 
-    private static WindowProperties windowProperties = new WindowProperties();
-    private Fonts fonts = new Fonts();
+    private WindowProperties windowProperties;
+    private Fonts fonts;
+    private HomeButtonsProperties homeButtonsProperties;
 
-    private JLabel headerText = new JLabel();
-    private JPanel contentPanel = new JPanel(new GridBagLayout());
-    private JPanel headerPanel = new JPanel(new BorderLayout());
-    JButton scratchButton = new JButton();
-    JLabel scratchLabel = new JLabel(" Start");
+    private JPanel contentPanel;
+    private JPanel headerPanel;
+
+    private JLabel scratchLabel;
+    private JLabel headerText;
 
     public App() {
-        super(windowProperties.getWindowTitle());
+        windowProperties = new WindowProperties();
+        fonts = new Fonts();
+        homeButtonsProperties = new HomeButtonsProperties();
+
         initializeUI();
     }
 
     private void initializeUI() {
-        fonts.loadRobotoMonoFont();
-        fonts.loadRobotoMonoFontButton();
         setWindowProperties();
         setupHeader();
         setupContent();
@@ -37,64 +36,61 @@ public class App extends JFrame {
     }
 
     private void setWindowProperties() {
+        contentPanel = new JPanel(new GridBagLayout());
         contentPanel.setBackground(WindowProperties.BACKGROUND_COLOR);
         add(contentPanel, BorderLayout.CENTER);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(windowProperties.getJanelaWidth(), windowProperties.getJanelaHeight());
-        this.setVisible(true);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(windowProperties.getJanelaWidth(), windowProperties.getJanelaHeight());
+        setVisible(true);
     }
 
     private void setupHeader() {
         setHeaderText();
+        setHeaderPanel();
+    }
+
+    private void setHeaderPanel() {
+        headerPanel = new JPanel(new BorderLayout());
         headerPanel.setBackground(WindowProperties.HEADER_COLOR);
         headerPanel.add(headerText, BorderLayout.NORTH);
         add(headerPanel, BorderLayout.NORTH);
     }
-
+    
     private void setHeaderText() {
-        headerText.setText("Scratch Sorting");
-        headerText.setFont(Fonts.robotoMonoFont_HeaderTitle);
+        headerText = new JLabel("Scratch Sorting");
+        headerText.setFont(fonts.loadRobotoMonoFont(64));
         headerText.setHorizontalAlignment(JLabel.CENTER);
         headerText.setForeground(WindowProperties.TEXT_COLOR);
     }
 
     private void setupContent() {
+        setContentGrid();
+        setContentLabel();
+        homeButtonsProperties.configureScratchButton();
+    }
+
+    private void setContentGrid(){
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(20, 20, 20, 20);
+        contentPanel.add(homeButtonsProperties.scratchButton, gbc);
+    }
 
-        contentPanel.add(scratchButton, gbc);
-
-        scratchLabel.setFont(Fonts.robotoMonoFont_HomeButton);
+    private void setContentLabel(){
+        scratchLabel = new JLabel(" Start");
+        scratchLabel.setFont(fonts.loadRobotoMonoFont(20));
         scratchLabel.setForeground(WindowProperties.TEXT_COLOR);
         scratchLabel.setAlignmentY((float) 0.8);
         scratchLabel.setAlignmentX((float) 0.4);
-        scratchButton.add(scratchLabel);
-        configureScratchButton();
-    }
-
-    private void configureScratchButton() {
-        ImageIcon scratchIcon = new ImageIcon(getClass().getResource("scratchButton.png"));
-        scratchButton.setIcon(scratchIcon);
-        scratchButton.setBackground(WindowProperties.HEADER_COLOR);
-        scratchButton.setPreferredSize(new Dimension(scratchIcon.getIconWidth(), scratchIcon.getIconHeight()));
-        scratchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onScratchButtonClick();
-            }
-        });
-    }
-
-    private void onScratchButtonClick() {
-        System.out.println("button clicked!");
+        homeButtonsProperties.scratchButton.add(scratchLabel);
     }
 
     private void setWindowIcon() {
         ImageIcon icon = new ImageIcon(getClass().getResource("icon.png"));
-        this.setIconImage(icon.getImage());
+        setIconImage(icon.getImage());
     }
 
     public static void main(String[] args) {

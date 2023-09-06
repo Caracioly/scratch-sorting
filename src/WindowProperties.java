@@ -2,7 +2,7 @@ import java.awt.Color;
 
 public class WindowProperties {
 
-    private String windowTitle = "Teste";
+    private String windowTitle = "Scratch Sorting";
     private int WindowWidth = 640;
     private int WindowHeight = 480;
 
