@@ -13,6 +13,7 @@ public class App extends JFrame {
 
     private WindowProperties windowProperties;
     private ButtonsProperties buttonsProperties;
+    private ScratchBlocks scratchBlocks;
 
     public JPanel contentPanel;
     public JPanel headerPanel;
@@ -23,7 +24,7 @@ public class App extends JFrame {
     public App() {
         windowProperties = new WindowProperties();
         buttonsProperties = new ButtonsProperties(this);
-
+        scratchBlocks = new ScratchBlocks();
         initializeUI();
     }
 
@@ -110,13 +111,17 @@ public class App extends JFrame {
         gbc.insets = new Insets(20, 20, 20, 20);
         contentPanel.add(instructionLabel, gbc);
         gbc.anchor = GridBagConstraints.SOUTH;
-        contentPanel.add(buttonsProperties.instructionButton);
+        contentPanel.add(buttonsProperties.instructionButton, gbc);
     }
 
     private void instructionLabelSettings() {
         instructionLabel.setPreferredSize(new Dimension(400, 300));
         instructionLabel.setFont(Fonts.loadRobotoMonoFont(24));
         instructionLabel.setForeground(WindowProperties.TEXT_COLOR);
+    }
+
+    public void setScratchBlocks() {
+
     }
 
     public static void main(String[] args) {
