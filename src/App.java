@@ -2,7 +2,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -94,7 +93,7 @@ public class App extends JFrame {
     }
 
     JLabel instructionLabel = new JLabel(
-            "<html>A direita aparecerá um algorítmo e você terá que organizar os blocos na ordem correta para funcionar.</html>");
+            "<html>In the right, you will see an algorithm, and your task is to arrange the blocks on the left in the correct order for the algorithm to work.</html>");
 
     public void loadScratchScreen() {
         contentPanel.removeAll();
@@ -116,7 +115,7 @@ public class App extends JFrame {
 
     private void instructionLabelSettings() {
         instructionLabel.setPreferredSize(new Dimension(400, 300));
-        instructionLabel.setFont(Fonts.loadRobotoMonoFont(30));
+        instructionLabel.setFont(Fonts.loadRobotoMonoFont(24));
         instructionLabel.setForeground(WindowProperties.TEXT_COLOR);
     }
 
