@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,13 +13,17 @@ class ButtonsProperties {
 
     public JButton scratchButton = new JButton();
     public JButton instructionButton = new JButton("Continue >>");
-    public JButton mova = new JButton();
 
     public ButtonsProperties(App app) {
         this.app = app;
     }
 
-    public void configureScratchButton() {
+    public void loadButtons(){
+        configureScratchButton();
+        configureinstructionButton();
+    }
+
+    private void configureScratchButton() {
         ImageIcon scratchIcon = new ImageIcon(getClass().getResource("scratchButton.png"));
         scratchButton.setIcon(scratchIcon);
         scratchButton.setBackground(WindowProperties.HEADER_COLOR);
@@ -40,8 +43,8 @@ class ButtonsProperties {
         app.loadScratchScreen();
     }
 
-    public void configureinstructionButton() {
-        instructionButton.setFont(Fonts.loadRobotoMonoFont(16));
+    private void configureinstructionButton() {
+        instructionButton.setFont(Fonts.robotoMonoFont16);
         instructionButton.setForeground(WindowProperties.TEXT_COLOR);
         instructionButton.setContentAreaFilled(false);
         instructionButton.setBorderPainted(false);
@@ -64,26 +67,11 @@ class ButtonsProperties {
         });
     }
 
-    public void onInstructionButtonClick(){
+    private void onInstructionButtonClick(){
         instructionButton.setVisible(false);
-        //loadScratchBlocks();
-        app.setScratchBlocks();
-        movaButtonConfig();
+        app.showContentScratchBlocks();
+        app.showContentScratchAlgo();
         System.out.println("Clicado");
     }
 
-    public void movaButtonConfig(){
-        ImageIcon movaIcon = new ImageIcon(getClass().getResource("mova.png"));
-        mova.setIcon(movaIcon);
-        mova.setPreferredSize(new Dimension(movaIcon.getIconWidth(), movaIcon.getIconHeight()));
-        mova.setContentAreaFilled(false);
-        mova.setBorderPainted(false);
-        mova.setFocusPainted(false);
-        //find a way to show the border when actually use the function
-        //mouse hover tp change the mouse or color or something
-    }
-
 }
-
-//i need to create a function to right the way config all buttons in the
-//program before i call for they 
