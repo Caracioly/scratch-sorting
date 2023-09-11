@@ -5,8 +5,8 @@ import javax.swing.ImageIcon;
 public class WindowProperties {
 
     private String windowTitle = "Scratch Sorting";
-    private int windowWidth = 640;
-    private int windowHeight = 480;
+    private int windowWidth = 1280;
+    private int windowHeight = 720;
     ImageIcon windowIcon = new ImageIcon(getClass().getResource("icon.png"));
 
     public static final Color BACKGROUND_COLOR = new Color(142, 142, 160);

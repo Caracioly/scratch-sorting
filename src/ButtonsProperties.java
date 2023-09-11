@@ -71,7 +71,6 @@ class ButtonsProperties {
         instructionButton.setVisible(false);
         app.showContentScratchBlocks();
         app.showContentScratchAlgo();
-        System.out.println("Clicado");
     }
 
 }

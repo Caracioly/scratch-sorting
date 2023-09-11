@@ -106,7 +106,7 @@ public class App extends JFrame {
         contentPanel.repaint();
         contentPanel.add(scratchBlocks.flagBlock, grid.content_CENTER);
     }
-
+    //trocar o nome dessa variavel
     private JLabel algoLabel = new JLabel(
             "<html>very long text test very long text test</html>");
 
